@@ -1,10 +1,5 @@
 console.log('%c HI', 'color: firebrick')
 
-function changeColor() {
-    document.body.style.color = "purple";
-    return false;
-} 
-
 document.addEventListener("DOMContentLoaded", function(){
    let imageDiv = document.getElementById("dog-image-container")
    let imageUl = document.createElement("ul")
@@ -14,8 +9,14 @@ document.addEventListener("DOMContentLoaded", function(){
 
 //=========================================================================
 
+let restOfAlphabet = ["e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 
-filterDropdown.addEventListener('click', function(){
+restOfAlphabet.forEach(letter => {
+filterDropdown.append(new Option(letter, letter))
+})
+
+
+filterDropdown.addEventListener('change', function(){
     let dogBreedUl = document.getElementById("dog-breeds")
         while(dogBreedUl.children.length > 0) {
         dogBreedUl.removeChild(dogBreedUl.querySelector('li'));
@@ -32,7 +33,9 @@ filterDropdown.addEventListener('click', function(){
         filteredBreedNameaArray.forEach(breed => {
             let dogLi = document.createElement("li")
             dogLi.innerText = breed
-            dogLi.addEventListener('click', changeColor)
+            dogLi.addEventListener('click', function(){
+                event.target.style.color = 'purple';
+            })
             dogBreedUl.append(dogLi)    
         })
 
@@ -72,7 +75,9 @@ function getList(){
      Object.keys(actualResponse.message).forEach(breed => {
          let dogLi = document.createElement("li")
          dogLi.innerText = breed
-         dogLi.addEventListener('click', changeColor)
+         dogLi.addEventListener('click', function(){
+             event.target.style.color = 'blue';
+         })
          dogBreedUl.append(dogLi)
      })
   
